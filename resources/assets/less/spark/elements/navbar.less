@@ -1,0 +1,48 @@
+.navbar {
+    -webkit-font-smoothing: antialiased;
+}
+
+.navbar-nav > li > a { line-height: 25px; }
+
+.navbar-inverse .navbar-brand {
+    color: @navbar-inverse-link-color;
+    font-weight: 600;
+}
+
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:focus {
+    color: @navbar-inverse-link-color;
+}
+
+.navbar-link {
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.with-navbar {
+    padding-top: 100px;
+}
+
+.navbar-icon {
+    position: relative;
+
+    .activity-indicator {
+        width: 13px;
+        height: 13px;
+        border-radius: 10px;
+        background: @brand-danger;
+        border: 2px solid #fff;
+        border-radius: 10px;
+        position: absolute;
+        right: -1px;
+        transition: all .15s;
+        transform: scale(.85);
+    }
+
+    .icon { font-size: 21px; }
+}
+
+.announcements-link:hover .activity-indicator {
+    transform: scale(1);
+}

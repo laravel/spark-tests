@@ -1,0 +1,92 @@
+// Body
+@body-bg: #f5f8fa;
+
+// Base Border Color
+@spark-border-color: darken(@body-bg, 10%);
+
+// Set Common Borders
+@list-group-border: @spark-border-color;
+@navbar-default-border: @spark-border-color;
+@panel-default-border: @spark-border-color;
+@panel-inner-border: @spark-border-color;
+@panel-footer-bg: @body-bg;
+
+// Grays
+@gray: #536570;
+@gray-light: #9da9b0;
+@gray-lighter: #d4dbe0;
+@gray-lightest: #f5f8fa;
+@gray-dark: #1e3948;
+@gray-darker: #122a38;
+
+// Brands
+@brand-primary: #3097D1;
+@brand-info: #8eb4cb;
+@brand-success: #4eb76e;
+@brand-warning: #cbb956;
+@brand-danger:  #bf5329;
+
+// Alert Colors
+@alert-warning-border: #E6D0A1;
+
+// Text Formatting
+@font-family-sans-serif: "Open Sans", Helvetica, Arial, sans-serif;
+@line-height-base: 1.6;
+@text-color: @gray-dark;
+
+@headings-font-weight: 400;
+@headings-line-height: 1.2;
+@headings-small-color: inherit;
+
+// Buttons
+@btn-default-bg: #fff;
+@btn-default-border: #d4dbe0;
+@btn-default-color: #536570;
+@btn-font-size: @font-size-base;
+@btn-font-weight: 300;
+
+// Inputs
+@input-border: #d4dbe0;
+@input-color-placeholder: @gray-light;
+
+// Containers
+@container-desktop: (960px + @grid-gutter-width);
+@container-large-desktop: (1200px + @grid-gutter-width);
+
+// Large Screens / Wide Desktops
+@screen-lg: (@container-large-desktop + @grid-gutter-width);
+@screen-lg-min: @screen-lg;
+@screen-lg-desktop: @screen-lg-min;
+@screen-md-max: (@screen-lg-min - 1);
+
+// Navbar
+@navbar-height: 65px;
+@navbar-default-bg: #fff;
+@navbar-default-link-active-color: #333;
+@navbar-default-link-active-bg: transparent;
+@navbar-margin-bottom: 0;
+@navbar-nav-active-font-weight: inherit;
+
+@navbar-inverse-color:  @gray-light;
+@navbar-inverse-bg: #fff;
+@navbar-inverse-border: @spark-border-color;
+
+@navbar-inverse-link-color: #969EA2;
+@navbar-inverse-link-hover-color: darken(@navbar-inverse-link-color, 10%);
+@navbar-inverse-link-active-color: @navbar-inverse-link-hover-color;
+@navbar-inverse-link-active-bg: transparent;
+
+@navbar-inverse-toggle-border-color:  @spark-border-color;
+@navbar-inverse-toggle-hover-bg: darken(@navbar-inverse-bg, 10%);
+
+@nav-link-hover-bg: @gray-lightest;
+
+// List Groups
+@list-group-hover-bg: @gray-lightest;
+
+// Dropdowns
+@dropdown-anchor-padding: 5px 20px;
+@dropdown-border: rgba(0,0,0,.05);
+@dropdown-link-color:  @navbar-default-color;
+@dropdown-link-hover-bg: @gray-lightest;
+@dropdown-padding: 10px 0;

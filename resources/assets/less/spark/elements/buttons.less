@@ -1,0 +1,75 @@
+// Basic Buttons
+.btn {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+// Outline Buttons
+.button-outline-variant(@color; @activeTextColor: #fff) {
+    color: @color;
+    background-color: transparent;
+    border-color: @color;
+
+    &:focus,
+    &.focus,
+    &:hover,
+    &:active,
+    &.active,
+    .open > .dropdown-toggle& {
+        color: @activeTextColor;
+        background-color: @color;
+        box-shadow: none;
+    }
+
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] & {
+        &,
+        &:hover,
+        &:focus,
+        &.focus,
+        &:active,
+        &.active {
+            border-color: @color;
+        }
+    }
+}
+
+.btn-default-outline {
+  .button-outline-variant(@btn-default-color);
+}
+
+.btn-primary-outline {
+  .button-outline-variant(@btn-primary-border);
+}
+
+.btn-success-outline {
+  .button-outline-variant(@btn-success-border);
+}
+
+.btn-info-outline {
+  .button-outline-variant(@btn-info-border);
+}
+
+.btn-warning-outline {
+  .button-outline-variant(@btn-warning-border);
+}
+
+.btn-danger-outline {
+  .button-outline-variant(@btn-danger-border);
+}
+
+// Other Button Utilities
+.btn-align {
+    padding-top: @padding-base-vertical + 1px;
+    padding-bottom: @padding-base-vertical + 1px;
+}
+
+.fa-btn {
+    margin-right: 7px;
+}
+
+.with-consistent-button-sizes .btn {
+    width: 150px;
+}

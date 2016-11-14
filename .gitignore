@@ -1,0 +1,6 @@
+/vendor
+/node_modules
+/spark
+Homestead.yaml
+Homestead.json
+.env
