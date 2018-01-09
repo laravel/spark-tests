@@ -29,9 +29,7 @@ class RegistrationBillingAddressTest extends TestCase
             'zip' => '71901',
             'country' => 'US',
             'terms' => true,
-        ]);
-
-        $this->seeStatusCode(200);
+        ])->assertSuccessful();
 
         Spark::collectBillingAddress(false);
     }
@@ -50,9 +48,7 @@ class RegistrationBillingAddressTest extends TestCase
             'password' => 'secret',
             'password_confirmation' => 'secret',
             'terms' => true,
-        ]);
-
-        $this->seeStatusCode(422);
+        ])->assertStatus(422);
 
         Spark::collectBillingAddress(false);
     }
@@ -62,7 +58,7 @@ class RegistrationBillingAddressTest extends TestCase
     {
         Spark::collectBillingAddress();
 
-        $this->json('POST', '/register', [
+        $response = $this->json('POST', '/register', [
             'plan' => 'spark-test-1',
             'stripe_token' => $this->getStripeToken(),
             'team' => 'Laravel',
@@ -76,11 +72,11 @@ class RegistrationBillingAddressTest extends TestCase
             'zip' => '71901',
             'country' => 'TV',
             'terms' => true,
-        ]);
-
-        $this->seeStatusCode(422);
-        $content = json_decode($this->response->getContent(), true);
-        $this->assertEquals('This country does not match the origin country of your card.', $content['country'][0]);
+        ])->assertStatus(422);
+        
+        $content = $response->decodeResponseJson();
+        
+        $this->assertEquals('This country does not match the origin country of your card.', $content['errors']['country'][0]);
 
         Spark::collectBillingAddress(false);
     }
@@ -104,9 +100,7 @@ class RegistrationBillingAddressTest extends TestCase
             'zip' => '71901',
             'country' => 'US',
             'terms' => true,
-        ]);
-
-        $this->seeStatusCode(422);
+        ])->assertStatus(422);
 
         Spark::collectBillingAddress(false);
     }

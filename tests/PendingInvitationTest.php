@@ -22,9 +22,8 @@ class PendingInvitationTest extends TestCase
         ]);
 
         $this->actingAs($user)
-                ->json('POST', '/settings/invitations/'.$invitation->id.'/accept');
-
-        $this->seeStatusCode(200);
+                ->json('POST', '/settings/invitations/'.$invitation->id.'/accept')
+                ->assertSuccessful();
 
         $this->assertEquals(1, $user->teams()->count());
     }
@@ -44,9 +43,8 @@ class PendingInvitationTest extends TestCase
         ]);
 
         $this->actingAs($team->owner)
-                ->json('POST', '/settings/invitations/'.$invitation->id.'/accept');
-
-        $this->seeStatusCode(404);
+                ->json('POST', '/settings/invitations/'.$invitation->id.'/accept')
+                ->assertStatus(404);
     }
 
 
@@ -64,9 +62,8 @@ class PendingInvitationTest extends TestCase
         ]);
 
         $this->actingAs($user)
-                ->json('POST', '/settings/invitations/'.$invitation->id.'/reject');
-
-        $this->seeStatusCode(200);
+                ->json('POST', '/settings/invitations/'.$invitation->id.'/reject')
+                ->assertSuccessful();
 
         $this->assertEquals(0, $user->teams()->count());
     }
@@ -86,8 +83,7 @@ class PendingInvitationTest extends TestCase
         ]);
 
         $this->actingAs($team->owner)
-                ->json('POST', '/settings/invitations/'.$invitation->id.'/reject');
-
-        $this->seeStatusCode(404);
+                ->json('POST', '/settings/invitations/'.$invitation->id.'/reject')
+                ->assertStatus(404);
     }
 }

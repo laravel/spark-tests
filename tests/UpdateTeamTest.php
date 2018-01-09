@@ -15,11 +15,9 @@ class UpdateTeamTest extends TestCase
         $this->actingAs($team->owner)
                 ->json('PUT', '/settings/teams/'.$team->id.'/name', [
                     'name' => 'Name (Updated)',
-                ]);
+                ])->assertSuccessful();
 
-        $this->seeStatusCode(200);
-
-        $this->seeInDatabase('teams', [
+        $this->assertDatabaseHas('teams', [
             'name' => 'Name (Updated)',
         ]);
     }
@@ -32,6 +30,6 @@ class UpdateTeamTest extends TestCase
         $this->actingAs($team->owner)
                 ->json('PUT', '/settings/teams/'.$team->id.'/name', [
                     'name' => '',
-                ])->seeStatusCode(422);
+                ])->assertStatus(422);
     }
 }

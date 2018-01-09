@@ -24,9 +24,7 @@ class RedeemCouponTest extends TestCase
         $this->actingAs($user)
                 ->json('POST', '/settings/payment-method/coupon', [
                     'coupon' => 'coupon-code',
-                ]);
-
-        $this->seeStatusCode(200);
+                ])->assertSuccessful();
     }
 
 
@@ -45,8 +43,6 @@ class RedeemCouponTest extends TestCase
         $this->actingAs($user)
                 ->json('POST', '/settings/payment-method/coupon', [
                     'coupon' => 'coupon-code',
-                ]);
-
-        $this->seeStatusCode(422);
+                ])->assertStatus(422);
     }
 }

@@ -23,9 +23,7 @@ class UpdateTeamPaymentMethodTest extends TestCase
         $this->actingAs($user)
                 ->json('PUT', '/settings/teams/'.$team->id.'/payment-method', [
                     'stripe_token' => $this->getStripeToken(),
-                ]);
-
-        $this->seeStatusCode(200);
+                ])->assertSuccessful();
     }
 
 
@@ -37,8 +35,6 @@ class UpdateTeamPaymentMethodTest extends TestCase
         $this->actingAs($user)
                 ->json('PUT', '/settings/teams/'.$team->id.'/payment-method', [
                     'stripe_token' => '',
-                ]);
-
-        $this->seeStatusCode(422);
+                ])->assertStatus(422);
     }
 }

@@ -20,11 +20,9 @@ class RegistrationTest extends TestCase
             'password' => 'secret',
             'password_confirmation' => 'secret',
             'terms' => true,
-        ]);
+        ])->assertSuccessful();
 
-        $this->seeStatusCode(200);
-
-        $this->seeInDatabase('users', [
+        $this->assertDatabaseHas('users', [
             'email' => 'taylor@laravel.com',
         ]);
 
@@ -45,11 +43,9 @@ class RegistrationTest extends TestCase
             'password' => 'secret',
             'password_confirmation' => 'secret',
             'terms' => true,
-        ]);
+        ])->assertSuccessful();;
 
-        $this->seeStatusCode(200);
-
-        $this->seeInDatabase('users', [
+        $this->assertDatabaseHas('users', [
             'email' => 'taylor@laravel.com',
         ]);
 
@@ -78,9 +74,7 @@ class RegistrationTest extends TestCase
             'password' => 'secret',
             'password_confirmation' => 'secret',
             'terms' => true,
-        ]);
-
-        $this->seeStatusCode(200);
+        ])->assertSuccessful();
 
         $user = User::where('email', 'taylor@laravel.com')->first();
 

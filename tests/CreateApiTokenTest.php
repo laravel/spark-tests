@@ -14,7 +14,7 @@ class CreateApiTokenTest extends TestCase
                     'name' => 'New Token',
                 ]);
 
-        $this->seeInDatabase('api_tokens', [
+        $this->assertDatabaseHas('api_tokens', [
             'name' => 'New Token',
         ]);
     }
@@ -25,9 +25,7 @@ class CreateApiTokenTest extends TestCase
         $this->actingAs(factory(User::class)->create())
                 ->json('POST', '/settings/api/token', [
                     'name' => '',
-                ]);
-
-        $this->seeStatusCode(422);
+                ])->assertSuccessful();
     }
 
 
@@ -62,6 +60,6 @@ class CreateApiTokenTest extends TestCase
                 ->json('POST', '/settings/api/token', [
                     'name' => 'New Token (Updated)',
                     'abilities' => ['delete-servers'],
-                ])->seeStatusCode(422);
+                ])->assertStatus(422);
     }
 }

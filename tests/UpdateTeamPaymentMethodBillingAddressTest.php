@@ -30,9 +30,7 @@ class UpdateTeamPaymentMethodBillingAddressTest extends TestCase
                     'state' => 'AR',
                     'zip' => '71901',
                     'country' => 'US',
-                ]);
-
-        $this->seeStatusCode(200);
+                ])->assertSuccessful();
 
         Spark::collectBillingAddress(false);
     }
@@ -55,9 +53,7 @@ class UpdateTeamPaymentMethodBillingAddressTest extends TestCase
                     'state' => 'AR',
                     'zip' => '71901',
                     'country' => 'TV',
-                ]);
-
-        $this->seeStatusCode(422);
+                ])->assertStatus(422);
 
         Spark::collectBillingAddress(false);
     }
@@ -79,9 +75,7 @@ class UpdateTeamPaymentMethodBillingAddressTest extends TestCase
                     'state' => 'TEST',
                     'zip' => '71901',
                     'country' => 'US',
-                ]);
-
-        $this->seeStatusCode(422);
+                ])->assertStatus(422);
 
         Spark::collectBillingAddress(false);
     }

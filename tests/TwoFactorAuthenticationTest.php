@@ -15,9 +15,7 @@ class TwoFactorAuthenticationTest extends TestCase
                 ->json('POST', '/settings/two-factor-auth', [
                     'country_code' => '1',
                     'phone' => '4792266733',
-                ]);
-
-        $this->seeStatusCode(200);
+                ])->assertSuccessful();
 
         $user = $user->fresh();
 
@@ -33,9 +31,7 @@ class TwoFactorAuthenticationTest extends TestCase
                 ->json('POST', '/settings/two-factor-auth', [
                     'country_code' => '',
                     'phone' => '4792266733',
-                ]);
-
-        $this->seeStatusCode(422);
+                ])->assertStatus(422);
     }
 
 
@@ -47,9 +43,7 @@ class TwoFactorAuthenticationTest extends TestCase
                 ->json('POST', '/settings/two-factor-auth', [
                     'country_code' => '1',
                     'phone' => '',
-                ]);
-
-        $this->seeStatusCode(422);
+                ])->assertStatus(422);
     }
 
 
@@ -61,17 +55,14 @@ class TwoFactorAuthenticationTest extends TestCase
                 ->json('POST', '/settings/two-factor-auth', [
                     'country_code' => '1',
                     'phone' => '4792266733',
-                ]);
-
-        $this->seeStatusCode(200);
+                ])->assertSuccessful();
 
         $user = $user->fresh();
         $this->assertTrue(! is_null($user->authy_id));
 
         $this->actingAs($user)
-                ->json('DELETE', '/settings/two-factor-auth', []);
-
-        $this->seeStatusCode(200);
+                ->json('DELETE', '/settings/two-factor-auth', [])
+                ->assertSuccessful();
 
         $user = $user->fresh();
         $this->assertTrue(is_null($user->authy_id));

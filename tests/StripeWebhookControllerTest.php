@@ -30,9 +30,7 @@ class StripeWebhookControllerTest extends TestCase
                     'customer' => $user->stripe_id,
                 ],
             ],
-        ]);
-
-        $this->seeStatusCode(200);
+        ])->assertSuccessful();
 
         $localInvoice = DB::table('invoices')->first();
 
@@ -62,9 +60,7 @@ class StripeWebhookControllerTest extends TestCase
                     'customer' => $team->stripe_id,
                 ],
             ],
-        ]);
-
-        $this->seeStatusCode(200);
+        ])->assertSuccessful();
 
         $localInvoice = DB::table('invoices')->first();
 
@@ -90,9 +86,7 @@ class StripeWebhookControllerTest extends TestCase
                     'customer' => $user->stripe_id,
                 ],
             ],
-        ]);
-
-        $this->seeStatusCode(200);
+        ])->assertSuccessful();
     }
 
     public function test_team_events_are_fired_when_subscriptions_are_deleted()
@@ -112,8 +106,6 @@ class StripeWebhookControllerTest extends TestCase
                     'customer' => $team->stripe_id,
                 ],
             ],
-        ]);
-
-        $this->seeStatusCode(200);
+        ])->assertSuccessful();
     }
 }

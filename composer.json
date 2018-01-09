@@ -6,18 +6,19 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.3.*",
-        "laravel/spark": "*@dev",
+        "fideloper/proxy": "~4.0",
+        "laravel/framework": "5.6.*",
+        "laravel/spark-aurelius": "*@dev",
         "laravel/cashier": "~7.0",
         "doctrine/dbal": "^2.5",
         "league/flysystem-aws-s3-v3": "^1.0",
         "firebase/php-jwt": "^3.0",
-        "mpociot/vat-calculator": "~1.0"
+        "mpociot/vat-calculator": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~4.0",
+        "phpunit/phpunit": "~6.0",
         "symfony/css-selector": "2.8.*|3.0.*",
         "symfony/dom-crawler": "2.8.*|3.0.*"
     },
@@ -37,26 +38,20 @@
     },
     "scripts": {
         "post-root-package-install": [
-            "php -r \"copy('.env.example', '.env');\""
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
-            "php artisan key:generate"
+            "@php artisan key:generate"
         ],
-        "post-install-cmd": [
-            "php artisan clear-compiled",
-            "php artisan optimize"
-        ],
-        "pre-update-cmd": [
-            "php artisan clear-compiled"
-        ],
-        "post-update-cmd": [
-            "php artisan optimize"
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover"
         ]
     },
     "repositories": [
         {
             "type": "path",
-            "url": "./../lib"
+            "url": "./../laravel-src/spark"
         }
     ],
     "minimum-stability": "dev",

@@ -22,11 +22,11 @@ class CancelTeamSubscriptionTest extends TestCase
         $this->assertFalse($team->subscription()->onGracePeriod());
 
         $this->actingAs($user)
-                ->json('DELETE', '/settings/teams/'.$team->id.'/subscription');
+                ->json('DELETE', '/settings/teams/'.$team->id.'/subscription')
+            ->assertSuccessful();
 
         $team = $team->fresh();
 
-        $this->seeStatusCode(200);
         $this->assertTrue($team->subscription()->onGracePeriod());
     }
 }

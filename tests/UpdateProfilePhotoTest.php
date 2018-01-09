@@ -25,9 +25,7 @@ class UpdateProfilePhotoTest extends TestCase
         $this->actingAs(factory(User::class)->create())
                 ->json('POST', '/settings/photo', [
                     'photo' => $file,
-                ]);
-
-        $this->seeStatusCode(200);
+                ])->assertSuccessful();
 
         $this->seeInDatabase('users', [
             'photo_url' => '/profile/photo',

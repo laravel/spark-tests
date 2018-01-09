@@ -23,11 +23,10 @@ class SubscribeBillingAddressTest extends TestCase
                     'state' => 'AR',
                     'zip' => '71901',
                     'country' => 'US',
-                ]);
+                ])->assertSuccessful();
 
         $user = $user->fresh();
 
-        $this->seeStatusCode(200);
         $this->assertTrue($user->subscribed());
         $this->assertEquals('spark-test-1', $user->subscription()->stripe_plan);
 
@@ -48,9 +47,7 @@ class SubscribeBillingAddressTest extends TestCase
                     'state' => 'AR',
                     'zip' => '71901',
                     'country' => 'TV',
-                ]);
-
-        $this->seeStatusCode(422);
+                ])->assertStatus(422);
 
         Spark::collectBillingAddress(false);
     }
@@ -69,9 +66,7 @@ class SubscribeBillingAddressTest extends TestCase
                     'state' => 'TEST',
                     'zip' => '71901',
                     'country' => 'US',
-                ]);
-
-        $this->seeStatusCode(422);
+                ])->assertStatus(422);
 
         Spark::collectBillingAddress(false);
     }

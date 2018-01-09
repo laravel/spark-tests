@@ -23,11 +23,9 @@ class RegistrationBraintreeTest extends TestCase
             'password' => 'secret',
             'password_confirmation' => 'secret',
             'terms' => true,
-        ]);
+        ])->assertSuccessful();
 
-        $this->seeStatusCode(200);
-
-        $this->seeInDatabase('users', [
+        $this->assertDatabaseHas('users', [
             'email' => 'taylor@laravel.com',
         ]);
 

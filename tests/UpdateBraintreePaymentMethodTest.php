@@ -23,9 +23,7 @@ class UpdateBraintreePaymentMethodTest extends TestCase
                 ->json('PUT', '/settings/payment-method', [
                     'braintree_token' => 'fake-valid-nonce',
                     'braintree_type' => 'credit-card',
-                ]);
-
-        $this->seeStatusCode(200);
+                ])->assertSuccessful();
     }
 
 
@@ -39,9 +37,7 @@ class UpdateBraintreePaymentMethodTest extends TestCase
                 ->json('PUT', '/settings/payment-method', [
                     'braintree_token' => '',
                     'braintree_type' => 'credit-card',
-                ]);
-
-        $this->seeStatusCode(422);
+                ])->assertStatus(422);
     }
 
 
@@ -55,8 +51,6 @@ class UpdateBraintreePaymentMethodTest extends TestCase
                 ->json('PUT', '/settings/payment-method', [
                     'braintree_token' => 'fake-valid-nonce',
                     'braintree_type' => '',
-                ]);
-
-        $this->seeStatusCode(422);
+                ])->assertStatus(422);
     }
 }

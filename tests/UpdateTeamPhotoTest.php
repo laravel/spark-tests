@@ -35,9 +35,7 @@ class UpdateTeamPhotoTest extends TestCase
         $this->actingAs($user)
                 ->json('POST', '/settings/teams/'.$team->id.'/photo', [
                     'photo' => $file,
-                ]);
-
-        $this->seeStatusCode(200);
+                ])->assertSuccessful();
 
         $this->seeInDatabase('teams', [
             'photo_url' => '/team/photo',

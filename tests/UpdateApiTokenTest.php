@@ -26,9 +26,7 @@ class UpdateApiTokenTest extends TestCase
                 ->json('PUT', '/settings/api/token/'.$token->id, [
                     'name' => 'New Token (Updated)',
                     'abilities' => [],
-                ]);
-
-        $this->seeStatusCode(200);
+                ])->assertSuccessful();
 
         $this->seeInDatabase('api_tokens', [
             'name' => 'New Token (Updated)',
@@ -51,7 +49,7 @@ class UpdateApiTokenTest extends TestCase
                 ->json('PUT', '/settings/api/token/'.$token->id, [
                     'name' => '',
                     'abilities' => [],
-                ])->seeStatusCode(422);
+                ])->assertStatus(422);
     }
 
 
@@ -75,9 +73,7 @@ class UpdateApiTokenTest extends TestCase
                 ->json('PUT', '/settings/api/token/'.$token->id, [
                     'name' => 'New Token (Updated)',
                     'abilities' => ['create-servers'],
-                ]);
-
-        $this->seeStatusCode(200);
+                ])->assertSuccessful();
 
         $token = $user->fresh()->tokens->first();
 
@@ -103,6 +99,6 @@ class UpdateApiTokenTest extends TestCase
                 ->json('PUT', '/settings/api/token/'.$token->id, [
                     'name' => 'New Token (Updated)',
                     'abilities' => ['delete-servers'],
-                ])->seeStatusCode(422);
+                ])->assertStatus(422);
     }
 }

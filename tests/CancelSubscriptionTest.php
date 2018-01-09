@@ -18,9 +18,8 @@ class CancelSubscriptionTest extends TestCase
         $this->assertFalse($user->subscription()->onGracePeriod());
 
         $this->actingAs($user)
-                ->json('DELETE', '/settings/subscription');
+                ->json('DELETE', '/settings/subscription')->assertSuccessful();
 
-        $this->seeStatusCode(200);
         $this->assertTrue($user->subscription()->onGracePeriod());
     }
 }

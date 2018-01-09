@@ -26,9 +26,7 @@ class RedeemTeamCouponTest extends TestCase
         $this->actingAs($user)
                 ->json('POST', '/settings/teams/'.$team->id.'/payment-method/coupon', [
                     'coupon' => 'coupon-code',
-                ]);
-
-        $this->seeStatusCode(200);
+                ])->assertSuccessful();
     }
 
 
@@ -48,8 +46,6 @@ class RedeemTeamCouponTest extends TestCase
         $this->actingAs($user)
                 ->json('POST', '/settings/teams/'.$team->id.'/payment-method/coupon', [
                     'coupon' => 'coupon-code',
-                ]);
-
-        $this->seeStatusCode(422);
+                ])->assertStatus(422);
     }
 }

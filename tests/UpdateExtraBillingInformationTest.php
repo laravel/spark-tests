@@ -14,9 +14,7 @@ class UpdateExtraBillingInformationTest extends TestCase
         $this->actingAs($user)
                 ->json('PUT', '/settings/extra-billing-information', [
                     'information' => 'Updated Information',
-                ]);
-
-        $this->seeStatusCode(200);
+                ])->assertSuccessful();
 
         $user = $user->fresh();
 

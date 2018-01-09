@@ -14,7 +14,7 @@ class CreateTeamTest extends TestCase
                     'name' => 'New Team',
                 ]);
 
-        $this->seeInDatabase('teams', [
+        $this->assertDatabaseHas('teams', [
             'name' => 'New Team',
         ]);
     }
@@ -25,8 +25,6 @@ class CreateTeamTest extends TestCase
         $this->actingAs(factory(User::class)->create())
                 ->json('POST', '/settings/teams', [
                     'name' => '',
-                ]);
-
-        $this->seeStatusCode(422);
+                ])->assertSuccessful();
     }
 }

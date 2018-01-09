@@ -20,11 +20,10 @@ class SubscribeTeamTest extends TestCase
                 ->json('POST', '/settings/teams/'.$team->id.'/subscription', [
                     'stripe_token' => $this->getStripeToken(),
                     'plan' => 'spark-test-1',
-                ]);
+                ])->assertSuccessful();
 
         $team = $team->fresh();
 
-        $this->seeStatusCode(200);
         $this->assertTrue($team->subscribed());
         $this->assertEquals('spark-test-1', $team->subscription()->stripe_plan);
     }
@@ -38,8 +37,9 @@ class SubscribeTeamTest extends TestCase
         $this->actingAs($user)
                 ->json('POST', '/settings/teams/'.$team->id.'/subscription', [
                     'stripe_token' => '',
+                    'existing_card' => 0,
                     'plan' => 'spark-test-1',
-                ])->seeStatusCode(422);
+                ])->assertStatus(422);
     }
 
 
@@ -51,7 +51,8 @@ class SubscribeTeamTest extends TestCase
         $this->actingAs($user)
                 ->json('POST', '/settings/teams/'.$team->id.'/subscription', [
                     'stripe_token' => $this->getStripeToken(),
+                    'existing_card' => 0,
                     'plan' => 'spark-test-10',
-                ])->seeStatusCode(422);
+                ])->assertStatus(422);
     }
 }

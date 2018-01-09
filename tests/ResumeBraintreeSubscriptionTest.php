@@ -20,11 +20,10 @@ class ResumeBraintreeSubscriptionTest extends TestCase
         $this->actingAs($user)
                 ->json('PUT', '/settings/subscription', [
                     'plan' => 'spark-test-1',
-                ]);
+                ])->assertSuccessful();
 
         $user = $user->fresh();
 
-        $this->seeStatusCode(200);
         $this->assertTrue($user->subscribed());
         $this->assertFalse($user->subscription()->onGracePeriod());
         $this->assertEquals('spark-test-1', $user->subscription()->braintree_plan);

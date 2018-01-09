@@ -21,11 +21,10 @@ class SubscribeBraintreeTeamTest extends TestCase
                     'braintree_token' => 'fake-valid-nonce',
                     'braintree_type' => 'credit-card',
                     'plan' => 'spark-test-1',
-                ]);
+                ])->assertSuccessful();
 
         $team = $team->fresh();
 
-        $this->seeStatusCode(200);
         $this->assertTrue($team->subscribed());
         $this->assertEquals('spark-test-1', $team->subscription()->braintree_plan);
     }
@@ -40,7 +39,7 @@ class SubscribeBraintreeTeamTest extends TestCase
                 ->json('POST', '/settings/teams/'.$team->id.'/subscription', [
                     'braintree_token' => '',
                     'plan' => 'spark-test-1',
-                ])->seeStatusCode(422);
+                ])->assertStatus(422);
     }
 
 
@@ -54,7 +53,7 @@ class SubscribeBraintreeTeamTest extends TestCase
                     'braintree_token' => 'fake-valid-nonce',
                     'braintree_type' => '',
                     'plan' => 'spark-test-1',
-                ])->seeStatusCode(422);
+                ])->assertStatus(422);
     }
 
 
@@ -68,6 +67,6 @@ class SubscribeBraintreeTeamTest extends TestCase
                     'braintree_token' => 'fake-valid-nonce',
                     'braintree_type' => 'credit-card',
                     'plan' => 'spark-test-10',
-                ])->seeStatusCode(422);
+                ])->assertStatus(422);
     }
 }

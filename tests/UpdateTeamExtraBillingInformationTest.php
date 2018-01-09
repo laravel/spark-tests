@@ -16,9 +16,7 @@ class UpdateTeamExtraBillingInformationTest extends TestCase
         $this->actingAs($user)
                 ->json('PUT', '/settings/teams/'.$team->id.'/extra-billing-information', [
                     'information' => 'Updated Information',
-                ]);
-
-        $this->seeStatusCode(200);
+                ])->assertSuccessful();
 
         $team = $team->fresh();
 
