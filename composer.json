@@ -51,7 +51,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "./../laravel-src/spark"
+            "url": "./../lib"
         }
     ],
     "minimum-stability": "dev",
